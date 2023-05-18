@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local1="clr-namespace:WeatherSampleApp.Converters"
+             x:Class="WeatherSampleApp.MainPage">
+     <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="Medium" />
+                <Setter Property="TextColor" 
+                        Value="Black" />
+            </Style>
+            
+            <Style x:Key="labelResultStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="Medium" />
+                <Setter Property="Margin" 
+                        Value="10,0,0,0" />
+            </Style>
+            
+            <local1:LongToDateTimeConverter x:Key="longToDateTimeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Grid 
+              Padding="10,20,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Text="Search by City" 
+                   Grid.ColumnSpan="3"
+                   HorizontalOptions="Center"
+                   TextColor="{Binding labelStyle}"
+                   FontAttributes="Bold" 
+                   FontSize="Medium" />
+            <Entry 
+                   Grid.Row="1" 
+                   Grid.Column="1"
+                   Margin="5,0"
+                   VerticalOptions="Center"
+                   BackgroundColor="DarkGray"
+                    TextColor="{Binding labelStyle}"
+                   Placeholder="Enter city name"
+                   Text="{Binding CityName}" />
+            
+            <Button Grid.Row="1" 
+                    Grid.Column="2"
+                    Text="Get Weather" 
+                    BorderWidth="1"
+                    BorderColor="White"
+                    BackgroundColor="DarkGray"
+                    TextColor="White"
+                    Command="{Binding GetWeatherCommand}" />
+        </Grid>
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+                   <Label Text="{Binding Temperature,StringFormat='{0:F0}°F'}"
+                          FontSize="Title"
+                           TextColor="{Binding labelStyle}"
+                          HorizontalOptions="Center"
+                          VerticalOptions="EndAndExpand"
+                          VerticalTextAlignment="Center"
+                          HorizontalTextAlignment="Center" />
+
+        </StackLayout>
+
+       <StackLayout VerticalOptions="EndAndExpand">
+            <StackLayout Padding="10" Spacing="30" Orientation="Horizontal">
+                 <StackLayout HeightRequest="110"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Orientation="Vertical"
+                              WidthRequest="100"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Fill">
+                <Frame HeightRequest="90" WidthRequest="100" CornerRadius="15" Padding="10">
+                    <StackLayout>
+                    <Image Source="sunrise.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="30"
+                           WidthRequest="30"/>
+                        <Label Text="Sunrise"
+                               FontSize="Micro"
+                                TextColor="{Binding labelStyle}"
+                               HorizontalOptions="Center"
+                               VerticalOptions="EndAndExpand"
+                               VerticalTextAlignment="Center"
+                               HorizontalTextAlignment="Center" />
+                    </StackLayout>
+                </Frame>
+                     <Label Text="{Binding Sunrise,Converter={StaticResource longToDateTimeConverter}}"
+                            FontSize="Micro"
+                             TextColor="{Binding labelStyle}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="EndAndExpand"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center" />
+                 </StackLayout>
+                 <StackLayout HeightRequest="110"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Orientation="Vertical"
+                              WidthRequest="100"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Fill">
+                <Frame HeightRequest="90"
+                       WidthRequest="100"
+                       CornerRadius="15"
+                       Padding="10">
+                    <StackLayout>
+                    <Image Source="sunset.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="30"
+                           WidthRequest="30"/>
+                    <Label Text="Sunset"
+                           FontSize="Micro"
+                           TextColor="{Binding labelStyle}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="EndAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" />
+                    </StackLayout>
+                </Frame>
+                    <Label Text="{Binding Sunset,Converter={StaticResource longToDateTimeConverter}}"
+                           FontSize="Micro"
+                            TextColor="{Binding labelStyle}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="EndAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" />
+                 </StackLayout>
+                 <StackLayout HeightRequest="110"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Orientation="Vertical"
+                              WidthRequest="100"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Fill" >
+                <Frame HeightRequest="90"
+                       WidthRequest="100"
+                       CornerRadius="15"
+                       Padding="10">
+                    <StackLayout>
+                    <Image Source="wind.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="30"
+                           WidthRequest="30"/>
+                    <Label Text="wind"
+                           FontSize="Micro"
+                           TextColor="{Binding labelStyle}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="EndAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" />
+                        </StackLayout>
+                </Frame>
+                <Label Text="{Binding Speed}"
+                       FontSize="Micro"
+                      TextColor="{Binding labelStyle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="EndAndExpand"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center" />
+                 </StackLayout>
+            </StackLayout>
+        <StackLayout Padding="10" Spacing="30" Orientation="Horizontal">
+                 <StackLayout HeightRequest="110"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Orientation="Vertical"
+                              WidthRequest="100"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Fill">
+                 <Frame HeightRequest="90" WidthRequest="100" CornerRadius="15" Padding="10">
+                    <StackLayout>
+                 <Image Source="pressure.png"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        HeightRequest="30"
+                        WidthRequest="30"/>
+                  <Label Text="pressure"
+                         FontSize="Micro"
+                         TextColor="{Binding labelStyle}"
+                         HorizontalOptions="Center"
+                         VerticalOptions="EndAndExpand"
+                         VerticalTextAlignment="Center"
+                         HorizontalTextAlignment="Center" />
+</StackLayout>
+                </Frame>
+                <Label Text="{Binding Pressure}"
+                       FontSize="Micro"
+                       TextColor="{Binding labelStyle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="EndAndExpand"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center" />
+                 </StackLayout>
+                 <StackLayout HeightRequest="110"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Orientation="Vertical"
+                              WidthRequest="100"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Fill" >
+                <Frame HeightRequest="90" WidthRequest="100" CornerRadius="15" Padding="10">
+                    <StackLayout>
+                    <Image Source="humidity.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="30"
+                           WidthRequest="30"/>
+                     <Label Text="Humidity"
+                            FontSize="Micro"
+                            TextColor="{Binding labelStyle}"
+                            HorizontalOptions="Center"
+                            VerticalOptions="EndAndExpand"
+                            VerticalTextAlignment="Center"
+                            HorizontalTextAlignment="Center" />
+                    </StackLayout>
+                </Frame>
+                <Label Text="{Binding Humidity}"
+                       FontSize="Micro"
+                       TextColor="{Binding labelStyle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="EndAndExpand"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center" />
+                 </StackLayout>
+                 <StackLayout HeightRequest="110"
+                              Grid.Row="0"
+                              Grid.Column="0"
+                              Orientation="Vertical"
+                              WidthRequest="100"
+                              HorizontalOptions="Center"
+                              VerticalOptions="Fill" >
+                <Frame HeightRequest="90" WidthRequest="100" CornerRadius="15" Padding="10">
+                    <StackLayout>
+                    <Image Source="info.png"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           HeightRequest="30"
+                           WidthRequest="30"/>
+                    <Label Text="info"
+                           FontSize="Micro"
+                           TextColor="{Binding labelStyle}"
+                           HorizontalOptions="Center"
+                           VerticalOptions="EndAndExpand"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center" />
+</StackLayout>
+                </Frame>
+                <Label Text="{Binding Title}"
+                       FontSize="Micro"
+                        TextColor="{Binding labelStyle}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="EndAndExpand"
+                       VerticalTextAlignment="Center"
+                       HorizontalTextAlignment="Center" />
+                 </StackLayout>
+            </StackLayout>
+       
+    </StackLayout>
+        </StackLayout>
+
+</ContentPage>
